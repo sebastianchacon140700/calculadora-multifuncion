@@ -190,7 +190,11 @@ class PanelDosVariables(wx.Panel):
 
 class VentanaDosVariables(wx.Frame):
     def __init__(self , parent = None):
-        super().__init__(None, title='convertidor de unidades', size=(600, 300))
+        super().__init__(
+            parent,
+            title='convertidor de unidades',
+            size=(600, 300))
+        self.parent = parent
         self.panel = PanelDosVariables(self)
         menu_bar = wx.MenuBar()
         menu_calculos = wx.Menu()

@@ -103,6 +103,12 @@ class PanelUnaVariable(wx.Panel):
 
         self.boton1 = wx.Button(self, label='Convertir', size=(60,40))
         self.boton_limpiar = wx.Button(self, label='Limpiar', size=(60,40))
+
+        self.boton_volver = wx.Button(
+            self,
+            label="Volver",
+            size=(100,40)
+)
         self.combo_origen = wx.ComboBox(
             self,
             choices=[],
@@ -136,6 +142,10 @@ class PanelUnaVariable(wx.Panel):
         fila_botones.Add(
             self.boton_limpiar, 1,
             wx.ALL | wx.CENTER, 10)
+        
+        fila_botones.Add(
+            self.boton_volver,1,
+            wx.ALL | wx.CENTER,10)
 
 
         sizer_ppal.Add(
@@ -169,6 +179,12 @@ class PanelUnaVariable(wx.Panel):
         self.boton1.Bind(wx.EVT_BUTTON, self.convertidor)
         
         self.boton_limpiar.Bind(wx.EVT_BUTTON, self.limpiar)
+        
+        self.boton_volver.Bind(
+            wx.EVT_BUTTON,
+            self.volver
+)
+
 
         self.combo_origen.Bind(
             wx.EVT_COMBOBOX,
@@ -185,13 +201,24 @@ class PanelUnaVariable(wx.Panel):
         self.destino = ""
         self.origen = ""
         self.combo_origen.Clear()
-        self.label_destino.SetLabel("Destino: Ninguno")      
+        self.label_destino.SetLabel("Destino: Ninguno")
+
+    def volver(self, event):
+        ventana = self.GetParent()
+        if ventana.parent:
+            ventana.parent.Show()
+            
+        ventana.Close()     
     
 
 class VentanaUnaVariable(wx.Frame):
 
     def __init__(self, parent = None):
-        super().__init__(None, title='convertidor de unidades', size=(600, 300))
+        super().__init__(
+            parent, 
+            title='convertidor de unidades',
+            size=(600, 300))
+        self.parent = parent
         self.panel = PanelUnaVariable(self)
 
         menu_bar = wx.MenuBar()
@@ -266,6 +293,8 @@ class VentanaUnaVariable(wx.Frame):
         self.Bind(wx.EVT_MENU, self.opcion_megabytes, self.datos_mb)
         self.Bind(wx.EVT_MENU, self.opcion_gigabytes, self.datos_gb)
         self.Bind(wx.EVT_MENU, self.opcion_terabytes, self.datos_tb)
+
+        self.Bind(wx.EVT_CLOSE, self.al_cerrar)
 
         self.Show()
 
@@ -508,7 +537,16 @@ class VentanaUnaVariable(wx.Frame):
         self.panel.origen = self.panel.combo_origen.GetValue()
 
     def salir(self, event):
+        if self.parent:
+            self.parent.Show()
+
         self.Close()
+
+    def al_cerrar(self, event):
+        if self.parent:
+            self.parent.Show()
+
+        event.Skip()    
 
 
 if __name__ == '__main__':
