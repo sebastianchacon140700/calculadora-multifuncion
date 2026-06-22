@@ -1,11 +1,12 @@
 from datetime import datetime
 
+
 RUTA_HISTORIAL_UNA = (
-    "historiales/historial_una_variable.txt"
+    "logicas/historiales/historial_una_variable.txt"
 )
 
 RUTA_HISTORIAL_DOS = (
-    "historiales/historial_dos_variables.txt"
+    "logicas/historiales/historial_dos_variables.txt"
 )
 
 

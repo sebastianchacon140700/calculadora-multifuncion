@@ -4,7 +4,10 @@ from logicas.peso import convertir_peso
 from logicas.temperatura import convertir_temperatura
 from logicas.datos import convertir_datos
 import logicas.eventos_una_variable as eventos
-from logicas.historial import leer_historial_una
+from logicas.historial import (
+    leer_historial_una,
+    guardar_historial_una
+)
 
 class PanelUnaVariable(wx.Panel):
 
@@ -74,6 +77,13 @@ class PanelUnaVariable(wx.Panel):
             return
         self.resultado.SetLabel(
             f"{resultado:g} {opcion}"
+        )
+
+        guardar_historial_una(
+            self.origen,
+            opcion,
+            valor,
+            resultado
         )
    
 
@@ -283,6 +293,7 @@ class VentanaUnaVariable(wx.Frame):
         menu_bar.Append(file_menu, "archivo")
         menu_bar.Append(menu_convertir, "convertir")
         menu_bar.Append(menu_historial,"Historial")
+        
         self.SetMenuBar(menu_bar)
         self.Bind(wx.EVT_MENU, self.salir, self.menu_salir)
         

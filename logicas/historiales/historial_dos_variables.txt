@@ -1,0 +1,2 @@
+[22/06/2026 17:56] Distancia | Dato1=54332.0 Km/h | Dato2=0.0 Dias | Resultado=0.00 km
+[22/06/2026 17:56] Distancia | Dato1=54332.0 Km/h | Dato2=54423.0 Dias | Resultado=70965850464.00 km

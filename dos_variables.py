@@ -4,6 +4,10 @@ from logicas.distancia_velocida_tiempo import (
     calcular_velocidad,
     calcular_tiempo
 )
+from logicas.historial import (
+    leer_historial_dos,
+    guardar_historial_dos
+)
 
 class PanelDosVariables(wx.Panel):
     
@@ -58,10 +62,18 @@ class PanelDosVariables(wx.Panel):
                     f"Resultado {resultado:.2f} {resultado_unidad}"
                 )
 
+            guardar_historial_dos(
+                self.operacion,
+                f"{valor1} {unidad1}",
+                f"{valor2} {unidad2}",
+                f"{resultado:.2f} {resultado_unidad}"
+                )
+
         except ValueError as e:
              self.resultado.SetLabel(
                 str(e)
                 )
+
 
 
     def __init__(self, parent):
@@ -247,6 +259,17 @@ class VentanaDosVariables(wx.Frame):
             menu_calculos,
             "Calculos"
 )
+        
+        menu_historial = wx.Menu()
+        self.m_ver_historial = menu_historial.Append(
+            wx.ID_ANY,
+            "Ver historial"
+            )
+
+        menu_bar.Append(
+            menu_historial,
+            "Historial")
+
         self.SetMenuBar(menu_bar)
    
 
@@ -276,6 +299,12 @@ class VentanaDosVariables(wx.Frame):
         )
 
         self.Bind(wx.EVT_CLOSE, self.al_cerrar)
+
+        self.Bind(
+            wx.EVT_MENU,
+            self.ver_historial,
+            self.m_ver_historial
+            )
 
         self.Show()
 
@@ -332,6 +361,18 @@ class VentanaDosVariables(wx.Frame):
             self.parent.Show()
 
         event.Skip()
+    
+    def ver_historial(self, event):
+        historial = leer_historial_dos()
+         
+        if historial.strip() == "":
+            historial = "No hay cálculos registrados"
+
+        wx.MessageBox(
+            historial,
+            "Historial de cálculos",
+            wx.OK | wx.ICON_INFORMATION
+            )
 
     
 if __name__ == '__main__':
