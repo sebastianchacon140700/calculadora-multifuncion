@@ -3,8 +3,7 @@ from logicas.longitud import convertir_longitud
 from logicas.peso import convertir_peso
 from logicas.temperatura import convertir_temperatura
 from logicas.datos import convertir_datos
-#from logicas.eventos_una_variable import
-
+import logicas.eventos_una_variable as eventos
 
 class PanelUnaVariable(wx.Panel):
 
@@ -309,240 +308,65 @@ class VentanaUnaVariable(wx.Frame):
     # eventos
 
     # eventos de longitud
+
+# eventos de longitud
     def opcion_cm(self, event):
-        self.panel.destino = "Centimetros"
-        self.panel.label_destino.SetLabel("Destino: Centimetros")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Pulgadas",
-            "Pies",
-            "Yardas"
-            ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_cm(self.panel)
 
     def opcion_pies(self, event):
-        self.panel.destino = "Pies"
-        self.panel.label_destino.SetLabel("Destino: Pies")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Centimetros",
-            "Pulgadas",
-            "Yardas"
-            ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
-        
+        eventos.opcion_pies(self.panel)
 
     def opcion_pulgadas(self, event):
-        self.panel.destino = "Pulgadas"
-        self.panel.label_destino.SetLabel("Destino: Pulgadas")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Centimetros",
-            "Pies",
-            "Yardas"
-            ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_pulgadas(self.panel)
 
     def opcion_yardas(self, event):
-        self.panel.destino = "Yardas"
-        self.panel.label_destino.SetLabel("Destino: Yardas")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Centimetros",
-            "Pies",
-            "Pulgadas"
-            ])
-        self.panel.combo_origen.SetSelection(0) 
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_yardas(self.panel)
 
-    # eventos de peso
+# eventos de peso
     def opcion_gramos(self, event):
-        self.panel.destino = "Gramos"
-        self.panel.label_destino.SetLabel("Destino: Gramos")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Kilogramos",
-            "Libras",
-            "Toneladas",
-            "Onzas"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
-    
+        eventos.opcion_gramos(self.panel)
+
     def opcion_kilogramos(self, event):
-        self.panel.destino = "Kilogramos"
-        self.panel.label_destino.SetLabel("Destino: Kilogramos")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Gramos",
-            "Libras",
-            "Toneladas",
-            "Onzas"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
-    
+        eventos.opcion_kilogramos(self.panel)
+
     def opcion_libras(self, event):
-        self.panel.destino = "Libras"
-        self.panel.label_destino.SetLabel("Destino: Libras")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Gramos",
-            "Kilogramos",
-            "Toneladas",
-            "Onzas"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_libras(self.panel)
 
     def opcion_toneladas(self, event):
-        self.panel.destino = "Toneladas"
-        self.panel.label_destino.SetLabel("Destino: Toneladas")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Gramos",
-            "Kilogramos",
-            "Libras",
-            "Onzas"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
-        
+        eventos.opcion_toneladas(self.panel)
 
     def opcion_onzas(self, event):
-        self.panel.destino = "Onzas"
-        self.panel.label_destino.SetLabel("Destino: Onzas")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Gramos",
-            "Kilogramos",
-            "Libras",
-            "Toneladas",
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()                
+        eventos.opcion_onzas(self.panel)
 
-    # eventos  de temperatura
+        # eventos de temperatura
     def opcion_celsius(self, event):
-        self.panel.destino = "Celsius"
-        self.panel.label_destino.SetLabel("Destino: Celsius")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Fahrenheit",
-            "Kelvin"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()                  
+        eventos.opcion_celsius(self.panel)
 
     def opcion_fahrenheit(self, event):
-        self.panel.destino = "Fahrenheit"
-        self.panel.label_destino.SetLabel("Destino: Fahrenheit")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Celsius",
-            "Kelvin"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()                  
+        eventos.opcion_fahrenheit(self.panel)
 
     def opcion_kelvin(self, event):
-        self.panel.destino = "Kelvin"
-        self.panel.label_destino.SetLabel("Destino: Kelvin")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Celsius",
-            "Fahrenheit"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_kelvin(self.panel)
 
-    # eventos de datos informaticos
+        # eventos de datos
     def opcion_bits(self, event):
-        self.panel.destino = "Bits"
-        self.panel.label_destino.SetLabel("Destino: Bits")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Bytes",
-            "Kilobytes",
-            "Megabytes",
-            "Gigabytes",
-            "Terabytes"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()        
+        eventos.opcion_bits(self.panel)
 
     def opcion_bytes(self, event):
-        self.panel.destino = "Bytes"
-        self.panel.label_destino.SetLabel("Destino: Bytes")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Bits",
-            "Kilobytes",
-            "Megabytes",
-            "Gigabytes",
-            "Terabytes"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()                
+        eventos.opcion_bytes(self.panel)
 
     def opcion_kilobytes(self, event):
-        self.panel.destino = "Kilobytes"
-        self.panel.label_destino.SetLabel("Destino: Kilobytes")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Bits",
-            "Bytes",
-            "Megabytes",
-            "Gigabytes",
-            "Terabytes"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_kilobytes(self.panel)
 
     def opcion_megabytes(self, event):
-        self.panel.destino = "Megabytes"
-        self.panel.label_destino.SetLabel("Destino: Megabytes")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Bits",
-            "Bytes",
-            "Kilobytes",
-            "Gigabytes",
-            "Terabytes"
-        ])
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()                
+        eventos.opcion_megabytes(self.panel)
 
     def opcion_gigabytes(self, event):
-        self.panel.destino = "Gigabytes"
-        self.panel.label_destino.SetLabel("Destino: Gigabytes")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Bits",
-            "Bytes",
-            "Kilobytes",
-            "Megabytes",
-            "Terabytes"
-        ])        
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_gigabytes(self.panel)
 
     def opcion_terabytes(self, event):
-        self.panel.destino = "Terabytes"
-        self.panel.label_destino.SetLabel("Destino: Terabytes")
-        self.panel.combo_origen.Clear()
-        self.panel.combo_origen.AppendItems([
-            "Bits",
-            "Bytes",
-            "Kilobytes",
-            "Megabytes",
-            "Gigabytes"
-        ])        
-        self.panel.combo_origen.SetSelection(0)
-        self.panel.origen = self.panel.combo_origen.GetValue()
+        eventos.opcion_terabytes(self.panel)
+
 
     def salir(self, event):
         if self.parent:
