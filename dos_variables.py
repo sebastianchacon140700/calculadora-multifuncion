@@ -133,6 +133,7 @@ class PanelDosVariables(wx.Panel):
         sizer_principal.AddStretchSpacer()
         sizer_principal.Add(fila_tipo, 0, wx.ALIGN_CENTER) # Colocamos el selector arriba
         sizer_principal.Add(fila_datos, 0, wx.ALIGN_CENTER)
+        
         sizer_principal.Add(fila_botones, 0, wx.ALIGN_CENTER)
         sizer_principal.Add(self.resultado, 0, wx.ALIGN_CENTER | wx.ALL, 10)
         sizer_principal.AddStretchSpacer()
@@ -202,7 +203,7 @@ class PanelDosVariables(wx.Panel):
 
 class VentanaDosVariables(wx.Frame):
     def __init__(self, parent = None):
-        super().__init__(parent, title='convertidor de unidades', size=(700, 450)) # Ajustamos alto
+        super().__init__(parent, title='Calculadora Fisica', size=(700, 450)) # Ajustamos alto
         self.parent = parent
         self.panel = PanelDosVariables(self)
         

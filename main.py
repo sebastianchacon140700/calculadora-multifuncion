@@ -13,7 +13,7 @@ class MiVentana(wx.Frame):
     def __init__(self):
         super().__init__(
             None,
-            title="Convertidor de Unidades",
+            title="Convertidor de Unidades y Calculadora Fisica",
             size=(600, 400)
         )
         # Ocultamos la ventana explícitamente mientras carga el splash

@@ -172,7 +172,7 @@ class PanelUnaVariable(wx.Panel):
             self.combo_magnitud,
             0,
             wx.ALL | wx.ALIGN_CENTER_VERTICAL,
-            10)
+            )
         
         
 
