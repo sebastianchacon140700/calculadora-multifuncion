@@ -182,7 +182,7 @@ class PanelUnaVariable(wx.Panel):
             wx.ALL | wx.CENTER, 10)
         
         fila_datos.Add(
-            self.textbox, 1, 
+            self.textbox, 0, 
             wx.ALL | wx.CENTER, 
             10)
         
