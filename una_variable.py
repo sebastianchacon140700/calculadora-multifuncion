@@ -26,7 +26,7 @@ class PanelUnaVariable(wx.Panel):
         )
             return
 
-        if opcion in {"Centimetros" ,"Pulgadas", "Pies", "Yardas"}:
+        if opcion in {"Centimetros","Metros", "Kilometros","Pulgadas", "Pies","Yardas", "Millas"}:
             resultado = convertir_longitud(
                 valor,
                 self.origen,
@@ -314,15 +314,21 @@ class PanelUnaVariable(wx.Panel):
         if magnitud == "Longitud":
             self.combo_origen.AppendItems([
                 "Centimetros",
+                "Metros",
+                "Kilometros",
                 "Pies",
                 "Pulgadas",
-                "Yardas"
+                "Yardas",
+                "Millas"
                 ])
             self.combo_destino.AppendItems([
                 "Centimetros",
+                "Metros",
+                "Kilometros",
                 "Pies",
                 "Pulgadas",
-                "Yardas"
+                "Yardas",
+                "Millas"
                 ])
             
         elif magnitud == "Peso":

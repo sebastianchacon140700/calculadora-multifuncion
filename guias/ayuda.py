@@ -34,7 +34,21 @@ def Ayuda(parent_window):
     
     # Al pasarle el parent_window a la caja nativa, la ventana se queda fija 
     # mostrando su botón único de cerrar automático abajo.
-    wx.adv.AboutBox(info, parent_window)
+    dlg = wx.Dialog(parent_window, title="Instructivo Cientifico", size=(540, 500))
+    panel=wx.Panel(dlg)
+    txt_ctrl = wx.TextCtrl(panel, value=info.Description, style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_RICH)
+
+    boton_ok = wx.Button(panel, label="OK")
+    boton_ok.Bind(wx.EVT_BUTTON, lambda event: dlg.EndModal(wx.ID_OK))
+
+    sizer_interno = wx.BoxSizer(wx.VERTICAL)
+    sizer_interno.Add(txt_ctrl,1, wx.EXPAND | wx.ALL, 10)
+    sizer_interno.Add(boton_ok, 0,wx.ALL | wx.ALIGN_RIGHT,10)
+    panel.SetSizer(sizer_interno)
+
+
+    dlg.ShowModal()
+    dlg.Destroy()
 
 
 # Bloque de pruebas integrado por si ejecutas este archivo solo
