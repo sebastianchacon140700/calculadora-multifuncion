@@ -51,7 +51,11 @@ class PanelDosVariables(wx.Panel):
                     valor2
                     )
 
-                resultado_unidad = "horas"
+                if resultado < 1.0:
+                    resultado = resultado * 60
+                    resultado_unidad = "minutos"
+                else:
+                    resultado_unidad = "horas"
 
             else:
                 self.resultado.SetLabel(

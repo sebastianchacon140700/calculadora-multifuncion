@@ -22,3 +22,5 @@
 [23/06/2026 10:01] Velocidad | Dato1=10000.0 Kilometros | Dato2=2.0 Horas | Resultado=5000.00 km/h
 [23/06/2026 10:01] Velocidad | Dato1=10000.0 Millas | Dato2=2.0 Horas | Resultado=8046.72 km/h
 [23/06/2026 10:01] Velocidad | Dato1=10000.0 Yardas | Dato2=2.0 Horas | Resultado=4.57 km/h
+[23/06/2026 11:11] Tiempo | Dato1=100.0 Metros | Dato2=80.0 Km/h | Resultado=0.07 minutos
+[23/06/2026 11:12] Tiempo | Dato1=10000.0 Kilometros | Dato2=100.0 Km/h | Resultado=100.00 horas
