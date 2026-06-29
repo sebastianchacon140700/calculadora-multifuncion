@@ -1,20 +1,15 @@
 import wx
-from logicas.distancia_velocida_tiempo import (
-    calcular_distancia,
-    calcular_velocidad,
-    calcular_tiempo
-)
-from logicas.historial import (
-    leer_historial_dos,
-    guardar_historial_dos
-)
+from logicas.distancia_velocida_tiempo import (calcular_distancia, 
+                                               calcular_velocidad,calcular_tiempo)
+from logicas.historial import (leer_historial_dos,
+                               guardar_historial_dos)
 
 class PanelDosVariables(wx.Panel):
-
-
-         
+    """
+    Ventana principal de la calculadora de física.
+    """
     def calcular(self, event):
-        
+        """Procesa los valores de entrada y ejecuta la fórmula seleccionada."""
         unidad_resultado = "Km/h"
         if self.datos3.IsShown():
             unidad_resultado = self.datos3.GetStringSelection()
@@ -24,28 +19,15 @@ class PanelDosVariables(wx.Panel):
 
         unidad1 = self.datos1.GetStringSelection()
         unidad2 = self.datos2.GetStringSelection()
-
+    #-----------------------------------------------------------------------
+    ##Lógica de cálculo según operación.
         try:
-            
             if self.operacion == "Distancia":
-                
-                resultado = calcular_distancia(
-                    valor1,
-                    unidad1,
-                    valor2,
-                    unidad2
-                    )
-
+                resultado = calcular_distancia( valor1,unidad1,valor2,unidad2)
                 resultado_unidad = "km"
 
             elif self.operacion == "Velocidad":
-                
-                resultado = calcular_velocidad(
-                     valor1,
-                    unidad1,
-                    valor2,
-                    unidad2
-                    )
+                resultado = calcular_velocidad(valor1,unidad1,valor2,unidad2)
 
                 if unidad_resultado == "m/s":
                     resultado = resultado / 3.6
@@ -55,12 +37,7 @@ class PanelDosVariables(wx.Panel):
 
             elif self.operacion == "Tiempo":
                 
-                resultado = calcular_tiempo(
-                    valor1,
-                    unidad1,
-                    valor2,
-                    unidad2
-                    )
+                resultado = calcular_tiempo(valor1,unidad1,valor2, unidad2)
 
                 if resultado < 1.0:
                     resultado = resultado * 60
@@ -69,42 +46,35 @@ class PanelDosVariables(wx.Panel):
                     resultado_unidad = "horas"
 
             else:
-                self.resultado.SetLabel(
-                     "Seleccione una operación"
-                     )
+                self.resultado.SetLabel("Seleccione una operación")
                 return
 
             self.resultado.SetLabel(
-                    f"Resultado {resultado:.2f} {resultado_unidad}"
-                )
+                    f"Resultado {resultado:.2f} {resultado_unidad}")
 
             guardar_historial_dos(
                 self.operacion,
                 f"{valor1} {unidad1}",
                 f"{valor2} {unidad2}",
-                f"{resultado:.2f} {resultado_unidad}"
-                )
+                f"{resultado:.2f} {resultado_unidad}")
 
         except ValueError as e:
-             self.resultado.SetLabel(
-                str(e)
-                )
+             self.resultado.SetLabel(str(e))
 
+    # ---------------------------------------------------------
+    # Construcción gráfica.
+    # Definición y configuración Widgets (Componentes).
+    # Organización del sizers (Layout).
+    # Registro de manejadores de eventos (Bind).
+    # ---------------------------------------------------------
     def __init__(self, parent):
         super().__init__(parent)
-        
-        # === NUEVO DESPLEGABLE PARA SELECCIONAR TIPO DE MEDIDA ===
+    #NUEVO DESPLEGABLE PARA SELECCIONAR TIPO DE MEDIDA 
         self.label_tipo = wx.StaticText(self, label="Tipo de Medida:")
-        self.combo_tipo = wx.Choice(
-            self,
-            choices=["Seleccionar...", "Distancia", "Velocidad", "Tiempo"]
-        )
-        self.combo_tipo.SetSelection(0) # Inicia en "Seleccionar..."
+        self.combo_tipo = wx.Choice(self,choices=["Selecciona...", "Distancia", "Velocidad", "Tiempo"])
+        self.combo_tipo.SetSelection(0) # Inicia en "Selecciona..."
 
-        self.label_resultado = wx.StaticText(
-            self,
-            label="Mostrar resultado en:"
-        )
+        self.label_resultado = wx.StaticText(self,label="Mostrar resultado en:")
         self.label_resultado.Hide()
 
         self.textbox1 = wx.SpinCtrlDouble(self, value="0.00", size=(120,40), min=0, max=1000000, inc=0.01)
@@ -112,7 +82,6 @@ class PanelDosVariables(wx.Panel):
 
         self.textbox2 = wx.SpinCtrlDouble(self, value="0.00", size=(120,40), min=0, max=1000000, inc=0.01)
         self.textbox2.SetDigits(2)
-
         self.operacion = ""
 
         self.datos1 = wx.Choice(self, choices=[])
@@ -128,8 +97,7 @@ class PanelDosVariables(wx.Panel):
         self.label2 = wx.StaticText(self, label="Dato 2")
         self.resultado = wx.StaticText(self, label="Resultado:")
         
-
-        # Sizers (Organizadores visuales)
+        # Sizers
         sizer_principal = wx.BoxSizer(wx.VERTICAL)
         fila_tipo = wx.BoxSizer(wx.HORIZONTAL) # Fila para el nuevo selector
         fila_datos = wx.BoxSizer(wx.HORIZONTAL)
@@ -151,7 +119,6 @@ class PanelDosVariables(wx.Panel):
         fila_datos.AddSpacer(20)
         fila_datos.Add(self.datos2, 0, wx.ALL, 10)
 
-
         fila_botones.Add(self.boton_calcular,1,wx.ALL,10)
         fila_botones.Add(self.boton_limpiar,1,wx.ALL,10)
 
@@ -168,12 +135,10 @@ class PanelDosVariables(wx.Panel):
         
         self.SetSizer(sizer_principal)
 
-        # Enlaces de eventos
         self.boton_calcular.Bind(wx.EVT_BUTTON, self.calcular)
         self.boton_limpiar.Bind(wx.EVT_BUTTON, self.limpiar)
         self.boton_volver.Bind(wx.EVT_BUTTON, self.volver)
         
-        # EVENTO DEL NUEVO DESPLEGABLE
         self.combo_tipo.Bind(wx.EVT_CHOICE, self.on_cambiar_tipo_medida)
 
     def on_cambiar_tipo_medida(self, event):
@@ -191,8 +156,6 @@ class PanelDosVariables(wx.Panel):
             self.label_resultado.Hide()
             self.datos3.Hide()
             self.Layout()
-
-
 
 
         elif seleccion == "Velocidad":
@@ -235,7 +198,7 @@ class PanelDosVariables(wx.Panel):
         self.datos3.SetSelection(wx.NOT_FOUND)
         self.label1.SetLabel("Dato 1")
         self.label2.SetLabel("Dato 2")
-        if event: # Solo resetea el combo si se pulsó el botón limpiar explícitamente
+        if event:               # Solo resetea el combo si se pulsó el botón limpiar explícitamente
             self.combo_tipo.SetSelection(0)
 
     def volver(self, event):
@@ -247,11 +210,10 @@ class PanelDosVariables(wx.Panel):
 
 class VentanaDosVariables(wx.Frame):
     def __init__(self, parent = None):
-        super().__init__(parent, title='Calculadora Fisica', size=(850, 550)) # Ajustamos alto
+        super().__init__(parent, title='Calculadora Física', size=(850, 550)) 
         self.parent = parent
         self.panel = PanelDosVariables(self)
         
-        # Mantenemos tu menú original por si quieres seguir usándolo
         menu_bar = wx.MenuBar()
         menu_calculos = wx.Menu()
         menu_dtv = wx.Menu()
@@ -265,14 +227,9 @@ class VentanaDosVariables(wx.Frame):
         menu_bar.Append(menu_calculos, "Calculos")
 
         menu_historial = wx.Menu()
-        self.m_ver_historial = menu_historial.Append(
-            wx.ID_ANY,
-            "Ver historial"
-            )
+        self.m_ver_historial = menu_historial.Append( wx.ID_ANY,"Ver historial")
 
-        menu_bar.Append(
-            menu_historial,
-            "Historial")
+        menu_bar.Append(menu_historial, "Historial")
 
         self.SetMenuBar(menu_bar)
    
@@ -284,7 +241,8 @@ class VentanaDosVariables(wx.Frame):
         self.Bind(wx.EVT_MENU,self.ver_historial,self.m_ver_historial)
         self.Show()
 
-    # Estos métodos ahora actualizan tanto la lógica como el nuevo menú visual
+    # Estos métodos deben actualizar el combo de tipo de medida 
+    # en lugar de cambiar directamente las etiquetas
     def opcion_Distancia(self, event):
         self.panel.combo_tipo.SetStringSelection("Distancia")
         self.panel.on_cambiar_tipo_medida(None)
@@ -308,16 +266,11 @@ class VentanaDosVariables(wx.Frame):
         event.Skip()
     
     def ver_historial(self, event):
-        historial = leer_historial_dos()
-        
+        historial = leer_historial_dos() 
         if historial.strip() == "":
             historial = "No hay cálculos registrados"
 
-        wx.MessageBox(
-            historial,
-            "Historial de cálculos",
-            wx.OK | wx.ICON_INFORMATION
-            )
+        wx.MessageBox( historial, "Historial de cálculos",wx.OK | wx.ICON_INFORMATION)
 
     
 if __name__ == '__main__':

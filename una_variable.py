@@ -10,7 +10,7 @@ class PanelUnaVariable(wx.Panel):
     def convertidor(self, event):
         valor = self.textbox.GetValue()
         opcion = self.destino
-        
+    # Validación de campos
         if self.destino == "":
             self.resultado.SetLabel( "Selecciona una unidad de destino")
             return
@@ -18,8 +18,8 @@ class PanelUnaVariable(wx.Panel):
         if self.origen == "":
             self.resultado.SetLabel("Selecciona una unidad de origen")
             return
-    #-----------------------------------------
-    # Lógica de enrutamiento
+   
+   # Lógica de enrutamiento
         if opcion in {"Centimetros",
                       "Metros", 
                       "Kilometros",
@@ -55,7 +55,7 @@ class PanelUnaVariable(wx.Panel):
         else:
             self.resultado.SetLabel("seleccione una opcion")
             return
-    #------------------------------------------
+   
     # Mostrar resultado y guardar en el historial
         self.resultado.SetLabel(f"{resultado:g} {opcion}")
         guardar_historial_una(self.origen,opcion,valor, resultado)
@@ -164,7 +164,7 @@ class PanelUnaVariable(wx.Panel):
         self.combo_magnitud.Bind( wx.EVT_CHOICE,  self.cambiar_magnitud)
 
     #---------------------------------------------- 
-
+    # Métodos de Interacción
     def seleccionar_origen(self, event): 
         """
         Captura el valor seleccionado en el combo_origen y lo almacena 
@@ -180,7 +180,7 @@ class PanelUnaVariable(wx.Panel):
         self.destino = self.combo_destino.GetValue()
         self.label_destino.SetLabel( f"Destino: {self.destino}" )
 
-    def limpiar(self, event):
+    def limpiar(self, event):       #Reinicia los campos del formulario.
         self.textbox.SetValue(0.0)
 
         self.resultado.SetLabel("")
@@ -201,12 +201,15 @@ class PanelUnaVariable(wx.Panel):
 
         ventana.Close()
 
-    def cambiar_magnitud(self, event):
+    #Actualiza el contenido de los combos según la categoría seleccionada.
+    def cambiar_magnitud(self, event): 
         magnitud = self.combo_magnitud.GetStringSelection()
         
         self.combo_origen.Clear()
         self.combo_destino.Clear()
         
+    #condicionales
+    # --- Carga de unidades segun la magnitud seleccionada.    
         if magnitud == "Longitud":
             self.combo_origen.AppendItems([
                 "Centimetros",
