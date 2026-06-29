@@ -258,7 +258,7 @@ class MiVentana(wx.Frame):
 
     def on_mostrar_acerca_de(self, event):
         wx.MessageBox(
-            "Convertidor de Unidades\nVersión 1.0",
+            "Calculadora Multifunción.\nConvertidor de unidades y calculos de fisica basica\nVersión 1.0.2",
             "Acerca de",
             wx.OK | wx.ICON_INFORMATION
         )
