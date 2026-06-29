@@ -1,5 +1,6 @@
 import os
 import wx
+import wx.adv
 import wx.lib.agw.advancedsplash as AS
 
 from una_variable import VentanaUnaVariable
@@ -259,11 +260,33 @@ class MiVentana(wx.Frame):
         ventana.Show()
 
     def on_mostrar_acerca_de(self, event):
-        wx.MessageBox(
-            "Convertidor de Unidades\nVersión 1.0",
-            "Acerca de",
-            wx.OK | wx.ICON_INFORMATION
-        )
+        info = wx.adv.AboutDialogInfo()
+        info.SetName("Convertidor de Unidades y Calculadora Física")
+        info.SetVersion("1.0")
+
+        info.SetDescription(
+            "Aplicación desarrollada en Python utilizando wxPython.\n\n"
+            "Permite realizar conversiones de unidades y resolver "
+            "cálculos físicos de distancia, velocidad y tiempo."
+    )
+
+        info.SetCopyright(
+            "© 2026")
+
+        info.SetDevelopers([
+            "Mikel Sebastián Chacón Vásquez",
+            "Susana Patriciamaru"
+            ])
+        
+        info.SetLicense(
+            "Este software fue desarrollado con fines académicos."
+            )
+        info.SetWebSite(
+            "https://github.com/sebastianchacon140700/proyecto_final_poo.git",
+            "Repositorio del proyecto"
+            )
+
+        wx.adv.AboutBox(info)
 
     def on_manual(self, event):
         abrir_manual(self)

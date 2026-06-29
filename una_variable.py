@@ -192,15 +192,15 @@ class PanelUnaVariable(wx.Panel):
         # FILA BOTONES
         fila_datos.Add(self.textbox,0,wx.ALL,10)
 
-        fila_datos.AddSpacer(20)
+        fila_datos.AddSpacer(25)
 
         fila_datos.Add(self.combo_origen,0,wx.ALL,10)
 
-        fila_datos.AddSpacer(10)
+        fila_datos.AddSpacer(15)
 
         fila_datos.Add(self.label_a,0,wx.ALL | wx.ALIGN_CENTER_VERTICAL,10)
 
-        fila_datos.AddSpacer(10)
+        fila_datos.AddSpacer(15)
 
         fila_datos.Add(self.combo_destino,0,wx.ALL,10)
 
@@ -300,8 +300,9 @@ class PanelUnaVariable(wx.Panel):
             f"Destino: {self.destino}"
             )
         
-
-
+       ################     
+       # BOTON LIMPIAR#
+       # ############## 
     def limpiar(self, event):
         self.textbox.SetValue(0.0)
 
