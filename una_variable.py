@@ -115,7 +115,7 @@ class PanelUnaVariable(wx.Panel):
         self.textbox = wx.SpinCtrlDouble(
            self,
             value="0.00",
-            size=(120,40),
+            size=(170,40),
             min=-1000000,
             max=1000000,
             inc=0.01
@@ -451,6 +451,7 @@ class VentanaUnaVariable(wx.Frame):
 
         self.Bind(wx.EVT_CLOSE, self.al_cerrar)
 
+        self.Centre()
         self.Show()
 
     def salir(self, event):

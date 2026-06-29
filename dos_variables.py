@@ -76,14 +76,14 @@ class PanelDosVariables(wx.Panel):
 
         self.label_resultado = wx.StaticText(self,label="Mostrar resultado en:")
         self.label_resultado.Hide()
-
-        self.textbox1 = wx.SpinCtrlDouble(self, value="0.00", size=(120,40), min=0, max=1000000, inc=0.01)
+    #botones de entrada de datos (SpinCtrlDouble) para los dos valores
+        self.textbox1 = wx.SpinCtrlDouble(self, value="0.00", size=(170,40), min=0, max=1000000, inc=0.01)
         self.textbox1.SetDigits(2)
 
-        self.textbox2 = wx.SpinCtrlDouble(self, value="0.00", size=(120,40), min=0, max=1000000, inc=0.01)
+        self.textbox2 = wx.SpinCtrlDouble(self, value="0.00", size=(170,40), min=0, max=1000000, inc=0.01)
         self.textbox2.SetDigits(2)
         self.operacion = ""
-
+    #--------------------------------------------------------------------------------
         self.datos1 = wx.Choice(self, choices=[])
         self.datos2 = wx.Choice(self, choices=[])
         self.datos3 = wx.Choice(self,choices=["Km/h", "m/s"])
@@ -97,13 +97,13 @@ class PanelDosVariables(wx.Panel):
         self.label2 = wx.StaticText(self, label="Dato 2")
         self.resultado = wx.StaticText(self, label="Resultado:")
         
-        # Sizers
+    # Sizers
         sizer_principal = wx.BoxSizer(wx.VERTICAL)
         fila_tipo = wx.BoxSizer(wx.HORIZONTAL) # Fila para el nuevo selector
         fila_datos = wx.BoxSizer(wx.HORIZONTAL)
         fila_botones = wx.BoxSizer(wx.HORIZONTAL)
 
-        # Añadimos elementos a la fila del tipo de medida
+    # Añadimos elementos a la fila del tipo de medida
         fila_tipo.Add(self.label_tipo,0,wx.ALL | wx.ALIGN_CENTER_VERTICAL,10)
         fila_tipo.Add(self.combo_tipo,0,wx.ALL,10)
 
@@ -198,7 +198,7 @@ class PanelDosVariables(wx.Panel):
         self.datos3.SetSelection(wx.NOT_FOUND)
         self.label1.SetLabel("Dato 1")
         self.label2.SetLabel("Dato 2")
-        if event:               # Solo resetea el combo si se pulsó el botón limpiar explícitamente
+        if event:               # Solo resetea el combo si se pulsó el botón limpiar.
             self.combo_tipo.SetSelection(0)
 
     def volver(self, event):
@@ -239,6 +239,8 @@ class VentanaDosVariables(wx.Frame):
         self.Bind(wx.EVT_MENU, self.salir, self.m_salir)
         self.Bind(wx.EVT_CLOSE, self.al_cerrar)
         self.Bind(wx.EVT_MENU,self.ver_historial,self.m_ver_historial)
+        
+        self.Centre()
         self.Show()
 
     # Estos métodos deben actualizar el combo de tipo de medida 
