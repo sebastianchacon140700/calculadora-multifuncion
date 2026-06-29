@@ -5,9 +5,9 @@ from logicas.historial import (leer_historial_dos,
                                guardar_historial_dos)
 
 class PanelDosVariables(wx.Panel):
-    """
-    Ventana principal de la calculadora de física.
-    """
+
+    #Ventana principal de la calculadora de física.
+    
     def calcular(self, event):
         """Procesa los valores de entrada y ejecuta la fórmula seleccionada."""
         unidad_resultado = "Km/h"
@@ -20,7 +20,8 @@ class PanelDosVariables(wx.Panel):
         unidad1 = self.datos1.GetStringSelection()
         unidad2 = self.datos2.GetStringSelection()
     #-----------------------------------------------------------------------
-    ##Lógica de cálculo según operación.
+    #Lógica de cálculo según operación.
+        
         try:
             if self.operacion == "Distancia":
                 resultado = calcular_distancia( valor1,unidad1,valor2,unidad2)
@@ -142,7 +143,7 @@ class PanelDosVariables(wx.Panel):
         self.combo_tipo.Bind(wx.EVT_CHOICE, self.on_cambiar_tipo_medida)
 
     def on_cambiar_tipo_medida(self, event):
-        """Cambia dinámicamente las etiquetas y unidades según la selección"""
+        #Cambia dinámicamente las etiquetas y unidades según la selección"""
         seleccion = self.combo_tipo.GetStringSelection()
         
         if seleccion == "Distancia":
