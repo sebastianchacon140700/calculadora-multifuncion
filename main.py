@@ -287,7 +287,7 @@ class MiVentana(wx.Frame):
             "Este software fue desarrollado con fines académicos."
             )
         info.SetWebSite(
-            "https://github.com/sebastianchacon140700/calculadora-multifuncion.git",
+            "https://github.com/sebastianchacon140700/calculadora-multifuncion-Marun-Chacon.git",
             "Repositorio del proyecto"
             )
 
