@@ -9,10 +9,8 @@ def Ayuda(parent_window):
     usando la misma estructurade la demo de wxPython.
     """
     # 1. Creamos el objeto de información nativo
-    info = wx.adv.AboutDialogInfo()
-    info.Name = "Guía de uso"
-    info.Version = ""
-    info.Copyright = ""
+    licenseText = "Este software está bajo la licencia MIT. Copyright (c) 2026."
+    
     
     texto_guia = (
         "GUÍA DE USO\n"
@@ -26,27 +24,30 @@ def Ayuda(parent_window):
         "   según lo que necesitas, pondras los valores que corresponden para asi realizar el cálculo.\n\n"
 
     )
+    # 2. Configuramos el objeto info
+    info = wx.adv.AboutDialogInfo()
+    info.Name = "Guía de uso"
+    info.Version = "1.0.2"
+    info.Copyright = "(C) 2026 Universidad Nacional de Pilar"
     
-    # Ajustamos el texto al ancho de la ventana usando parent_window
-    info.Description = wordwrap(texto_guia, 420, wx.ClientDC(parent_window))
+    # Aquí agregamos los desarrolladores
+    info.Developers = ["Profesor: Javier Castrillo",
+                       "Alumnos: Sebastian Chacon y Susana Marun",
+                       "Estudiantes de la Universidad Nacional de Pilar",
+                       "Facultad de Producción y Tecnología",
+                       "Carrera: Tecnicatura en Desarrollo Web"]
     
-    # Al pasar el parent_window a la caja nativa, la ventana se queda fija 
-    # mostrando su botón único de cerrar automático abajo.
-    dlg = wx.Dialog(parent_window, title="Instructivo Cientifico", size=(540, 500))
-    panel=wx.Panel(dlg)
-    txt_ctrl = wx.TextCtrl(panel, value=info.Description, style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_RICH)
-
-    boton_ok = wx.Button(panel, label="OK")
-    boton_ok.Bind(wx.EVT_BUTTON, lambda event: dlg.EndModal(wx.ID_OK))
-
-    sizer_interno = wx.BoxSizer(wx.VERTICAL)
-    sizer_interno.Add(txt_ctrl,1, wx.EXPAND | wx.ALL, 10)
-    sizer_interno.Add(boton_ok, 0,wx.ALL | wx.ALIGN_RIGHT,10)
-    panel.SetSizer(sizer_interno)
-
-    dlg.ShowModal()
-    dlg.Destroy()
-
+    # Aquí agregamos el sitio web si quieres
+    info.WebSite = ("")
+    
+    # 3. Aplicamos el formato con wordwrap
+    # Usamos el DC de la ventana para que el texto se ajuste al ancho
+    dc = wx.ClientDC(parent_window)
+    info.License = wordwrap(licenseText, 450, dc)
+    info.Description = wordwrap(texto_guia, 450, dc)
+    
+    # 4. Abrimos la ventana nativa única
+    wx.adv.AboutBox(info)
 # Bloque de pruebas integrado por si ejecutas este archivo solo
 if __name__ == '__main__':
     app = wx.App(False)

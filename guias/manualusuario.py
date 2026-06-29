@@ -1,19 +1,18 @@
 import wx
-import wx.lib.dialogs  # <--- IMPORTACIÓN CORREGIDA
+import wx.lib.dialogs 
 from wx.lib.wordwrap import wordwrap
 
 def abrir_manual(parent_window):
     """
     Muestra el texto largo de la guía en una ventana compacta
-    con barra de desplazamiento vertical automática y alineado a la izquierda.
+    con barra de desplazamiento vertical.
     """
-    # Tu texto de las fórmulas completo
     texto_guia = (
         " GUÍA DE CÁLCULO MANUAL - PREPARACIÓN DE EXAMEN\n"
         " ===================================================\n"
         "REGLA DE ORO: En el examen solo usarás la calculadora científica. \n"
-        "Asegúrate de plantear siempre la fórmula en papel antes de operar.\n\n"
-        "1. CONVERSIONES DE UNA VARIABLE (Magnitudes Fundamentales y Digitales)\n"
+        "Asegurate de plantear siempre la fórmula en papel antes de operar.\n\n"
+        "1. CONVERSIONES DE UNA VARIABLE (Magnitudes)\n"
         "-------------------------------------------------------------------\n"
         "A) LONGITUD (De unidad menor a mayor: Metros a Kilómetros)\n"
         "  • Método: Dividir el valor inicial por 1000, ya que 1 kilómetro tiene 1000 metros.\n"
@@ -23,7 +22,7 @@ def abrir_manual(parent_window):
         " B) TEMPERATURA (Escala Celsius a Fahrenheit)\n"
         "  • Método: Multiplicar los grados Celsius por 1.8 (o 9/5) para escalar la proporción y luego sumar 32 que es el punto de congelación en Fahrenheit.\n"
         "  • Fórmula: °F = (°C × 1.8) + 32\n"
-        "  ✏️ Ejemplo de Examen: Convertir 25 °C a Fahrenheit.\n"
+        "  ✏️ Ejemplo de Examen: Convertir 25 °C a °F.\n"
         "     Desarrollo: (25 × 1.8) + 32 = 45 + 32 = 77 °F\n\n"
         " C) INFORMÁTICA / DATOS (De unidad menor a mayor: Bytes a Kilobytes)\n"
         "  • Método: Dividir el valor por 1024. ¡ATENCIÓN!: En informática no se usa el sistema métrico decimal (1000), sino el sistema binario basado en potencias de 2 (2^10 = 1024).\n"
@@ -32,7 +31,7 @@ def abrir_manual(parent_window):
         "     Desarrollo: 4096 / 1024 = 4 KB\n\n"
         " 2. CÁLCULOS FÍSICOS DE DOS VARIABLES (Cinemática - MRU)\n"
         "-------------------------------------------------------------------\n"
-        "Para recordar cómo despejar las variables en papel, utiliza el triángulo clásico de Cinemática. Tapando con el dedo la letra que buscas, la posición de las otras dos te dice qué operación matemática hacer:\n"
+        "Para recordar cómo despejar las variables en papel, utiliza el triángulo clásico de Cinemática. Tapando la letra que buscas, la posición de las otras dos te dice qué operación matemática hacer:\n"
         "\n"
         "         /\\ \n"
         "        /  \\ \n"
@@ -55,13 +54,13 @@ def abrir_manual(parent_window):
         " ⚠️ ¡ALERTAS CRÍTICAS PARA EL EXAMEN!\n"
         "-------------------------------------------------------------------\n"
         "1. Compatibilidad de Unidades: NUNCA operes directamente si las unidades no coinciden. Si la distancia está en kilómetros (km) y el tiempo en minutos (min), primero debes pasar los minutos a horas dividiendo por 60 antes de usar el triángulo de física.\n"
-        "2. Paréntesis en la Calculadora: Al calcular la temperatura, asegúrate de escribir los paréntesis en tu calculadora científica: '(Valor × 1.8) + 32' para evitar que separe mal los términos.\n"
+        "2. Paréntesis en la Calculadora: Al calcular la temperatura, asegurate de escribir los paréntesis en tu calculadora científica: '(Valor × 1.8) + 32' para evitar que separe mal los términos.\n"
     )
     
-    # Ajustamos el texto para que no quede excesivamente ancho
+    # Ajustamos el texto al ancho de la ventana usando parent_window
     texto_ajustado = wordwrap(texto_guia, 460, wx.ClientDC(parent_window))
     
-    # 🌟 CORREGIDO AQUÍ: Llamamos a la ruta completa del componente
+    # Llamamos a la ruta completa del componente
     dlg = wx.Dialog(parent_window, title="Instructivo Cientifico", size=(540, 500))
     panel=wx.Panel(dlg)
     txt_ctrl = wx.TextCtrl(panel, value=texto_ajustado, style=wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_RICH)
