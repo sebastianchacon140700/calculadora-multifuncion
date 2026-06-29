@@ -111,7 +111,7 @@ class PanelUnaVariable(wx.Panel):
 
         self.combo_magnitud.SetSelection(0)
         
-        
+    #boton de entrada de datos (SpinCtrlDouble) 
         self.textbox = wx.SpinCtrlDouble(
            self,
             value="0.00",
